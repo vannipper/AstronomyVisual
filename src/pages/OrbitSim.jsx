@@ -69,60 +69,60 @@ function OrbitSim() {
     setDistance(0);
   };
 
-  // Store handleReset in ref so event handlers can access latest version
+
   handleResetRef.current = handleReset;
 
   useEffect(() => {
     if (showInstructions) {
-      return; // Don't start game loop until instructions are dismissed
+      return;
     }
 
     const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d', { alpha: false });
     const state = gameStateRef.current;
 
-    // Set canvas size
+
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight - 150;
+      canvas.height = window.innerHeight;
     };
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    // Mouse move handler - update rocket angle
+
     const handleMouseMove = (e) => {
       const rect = canvas.getBoundingClientRect();
       state.mouseX = e.clientX - rect.left;
       state.mouseY = e.clientY - rect.top;
 
-      // Convert to world coordinates
+
       const worldMouseX = state.mouseX - canvas.width / 2 + state.camera.x;
       const worldMouseY = state.mouseY - canvas.height / 2 + state.camera.y;
 
-      // Calculate angle to mouse
+
       const dx = worldMouseX - state.rocket.x;
       const dy = worldMouseY - state.rocket.y;
       state.rocket.angle = Math.atan2(dy, dx);
     };
 
-    // Click handler - thrust
+
     const handleMouseDown = (e) => {
-      if (e.button === 0) { // Left click
+      if (e.button === 0) {
         state.keys['mouseDown'] = true;
       }
     };
 
     const handleMouseUp = (e) => {
-      if (e.button === 0) { // Left click
+      if (e.button === 0) {
         state.keys['mouseDown'] = false;
       }
     };
 
-    // Keyboard handlers
+
     const handleKeyDown = (e) => {
       state.keys[e.key] = true;
 
-      // Reset on 'R' key
+
       if (e.key === 'r' || e.key === 'R') {
         if (handleResetRef.current) {
           handleResetRef.current();
@@ -140,9 +140,9 @@ function OrbitSim() {
     window.addEventListener('keydown', handleKeyDown);
     window.addEventListener('keyup', handleKeyUp);
 
-    // Physics and rendering loop
+
     const gameLoop = () => {
-      // Update planets with real gravity from sun ONLY
+
       state.planets.forEach(planet => {
         let dx = state.sun.x - planet.x;
         let dy = state.sun.y - planet.y;
@@ -156,7 +156,7 @@ function OrbitSim() {
         planet.y += planet.vy;
       });
 
-      // Apply thrust if mouse is down and fuel available
+
       if (state.keys['mouseDown'] && state.rocket.fuel > 0) {
         state.rocket.vx += Math.cos(state.rocket.angle) * state.rocket.thrust;
         state.rocket.vy += Math.sin(state.rocket.angle) * state.rocket.thrust;
@@ -164,7 +164,7 @@ function OrbitSim() {
         setFuel(Math.max(0, state.rocket.fuel));
       }
 
-      // Apply gravity to ROCKET from sun
+
       let dx = state.sun.x - state.rocket.x;
       let dy = state.sun.y - state.rocket.y;
       let distSq = dx * dx + dy * dy;
@@ -173,7 +173,7 @@ function OrbitSim() {
       state.rocket.vx += (dx / dist) * force * 0.01;
       state.rocket.vy += (dy / dist) * force * 0.01;
 
-      // Apply gravity to ROCKET from planets
+
       state.planets.forEach(planet => {
         dx = planet.x - state.rocket.x;
         dy = planet.y - state.rocket.y;
@@ -186,21 +186,21 @@ function OrbitSim() {
         }
       });
 
-      // Update rocket position
+
       state.rocket.x += state.rocket.vx;
       state.rocket.y += state.rocket.vy;
 
-      // Add to trail
+
       state.rocket.trail.push({ x: state.rocket.x, y: state.rocket.y });
       if (state.rocket.trail.length > 200) {
         state.rocket.trail.shift();
       }
 
-      // Update camera to follow rocket
+
       state.camera.x = state.rocket.x;
       state.camera.y = state.rocket.y;
 
-      // Calculate distance from starting planet
+
       const startPlanet = state.planets[0];
       const distFromStart = Math.sqrt(
         Math.pow(state.rocket.x - startPlanet.x, 2) +
@@ -208,14 +208,14 @@ function OrbitSim() {
       );
       setDistance(Math.floor(distFromStart));
 
-      // Render
+
       ctx.fillStyle = '#0a0e1a';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       ctx.save();
       ctx.translate(canvas.width / 2 - state.camera.x, canvas.height / 2 - state.camera.y);
 
-      // Draw sun
+
       ctx.fillStyle = '#fbbf24';
       ctx.beginPath();
       ctx.arc(state.sun.x, state.sun.y, state.sun.radius, 0, Math.PI * 2);
@@ -225,7 +225,7 @@ function OrbitSim() {
       ctx.fill();
       ctx.shadowBlur = 0;
 
-      // Draw orbit paths (approximate circles based on starting positions)
+
       state.planets.forEach(planet => {
         const orbitRadius = Math.sqrt(
           Math.pow(planet.x - state.sun.x, 2) +
@@ -240,7 +240,7 @@ function OrbitSim() {
         ctx.setLineDash([]);
       });
 
-      // Draw planets
+
       state.planets.forEach(planet => {
         ctx.fillStyle = planet.color;
         ctx.beginPath();
@@ -248,7 +248,7 @@ function OrbitSim() {
         ctx.fill();
       });
 
-      // Draw rocket trail
+
       if (state.rocket.trail.length > 1) {
         ctx.strokeStyle = 'rgba(59, 130, 246, 0.3)';
         ctx.lineWidth = 2;
@@ -260,12 +260,12 @@ function OrbitSim() {
         ctx.stroke();
       }
 
-      // Draw rocket
+
       ctx.save();
       ctx.translate(state.rocket.x, state.rocket.y);
       ctx.rotate(state.rocket.angle);
 
-      // Rocket body
+
       ctx.fillStyle = '#e2e8f0';
       ctx.beginPath();
       ctx.moveTo(12, 0);
@@ -274,7 +274,7 @@ function OrbitSim() {
       ctx.closePath();
       ctx.fill();
 
-      // Rocket nose
+
       ctx.fillStyle = '#ef4444';
       ctx.beginPath();
       ctx.moveTo(12, 0);
@@ -283,7 +283,7 @@ function OrbitSim() {
       ctx.closePath();
       ctx.fill();
 
-      // Thrust visualization
+
       if (state.keys['mouseDown'] && state.rocket.fuel > 0) {
         ctx.fillStyle = '#fbbf24';
         ctx.beginPath();
@@ -296,7 +296,7 @@ function OrbitSim() {
 
       ctx.restore();
 
-      // Draw aim line
+
       const worldMouseX = state.mouseX - canvas.width / 2 + state.camera.x;
       const worldMouseY = state.mouseY - canvas.height / 2 + state.camera.y;
       ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
@@ -327,10 +327,7 @@ function OrbitSim() {
 
   return (
     <div className="orbit-container">
-      <header className="page-header">
-        <Link to="/" className="back-button">← Back</Link>
-        <h1>Orbital Mechanics</h1>
-      </header>
+      <Link to="/" className="back-button">← Home</Link>
 
       <main className="orbit-content">
         <canvas ref={canvasRef}></canvas>

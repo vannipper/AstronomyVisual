@@ -17,21 +17,23 @@ Experience realistic Newtonian physics in space:
 - Rocket affected by gravitational forces from both the sun and planets
 - Simplified multi-body physics for stable, long-term simulations
 
-### 🌌 Night Sky Viewer (Angular Size Simulator)
-Explore the night sky and understand angular measurements:
-- Pan around a realistic star field with 27 bright stars from the Yale Bright Star Catalog
-- Zoom in and out to see angular measurements from degrees to arcseconds
-- View real deep sky objects including:
-  - Andromeda Galaxy
-  - Orion Nebula
-  - Pleiades Star Cluster
-- Visual measurement overlays for 1°, 1' (arcminute), and 1" (arcsecond)
-- Dynamic unit switching based on zoom level
+### 🌌 Night Sky Viewer
+Explore the night sky and understand celestial navigation:
+- Pan around a realistic hemispherical star field with 130+ real stars from astronomical catalogs
+- Interactive zoom with Field of View (FOV) display ranging from 180° to 1°
+- Accurate constellation patterns with connecting lines:
+  - Ursa Major (Big Dipper), Ursa Minor (Little Dipper)
+  - Orion, Cassiopeia, Leo, Gemini
+  - Cygnus, Lyra, Scorpius, and more
+- Real astronomical data with right ascension and declination coordinates
+- Star brightness scaled by actual magnitude values
+- Intuitive click-and-drag navigation
 
 **Educational Value:**
-- Understand the scale of celestial objects
-- Learn about angular measurements used in astronomy
-- See how objects appear at different magnifications
+- Learn to identify major constellations in the night sky
+- Understand celestial coordinate systems (RA/Dec)
+- Visualize how field of view affects what you can see
+- Experience how stars appear at different magnitudes
 
 ## Technology Stack
 
@@ -79,18 +81,20 @@ The production-ready files will be in the `dist` directory.
 
 ### Orbital Mechanics Simulator
 1. Click on "Orbital Mechanics" from the home page
-2. Read the instructions popup and click "Begin Simulation"
+2. Read the instructions popup and click "Start Simulation"
 3. Move your mouse to aim the rocket
-4. Click to fire the thrusters (uses fuel)
+4. Click and hold to fire the thrusters (uses fuel)
 5. Use gravity assists from planets to travel farther
 6. Press 'R' or click the reset button to restart
+7. Press the "← Home" button to return to the main menu
 
 ### Night Sky Viewer
-1. Click on "Angular Size" from the home page
+1. Click on "Night Sky" from the home page
 2. Read the instructions popup and click "Start Exploring"
-3. Scroll to zoom in and out
+3. Scroll to zoom in and out (changes Field of View)
 4. Click and drag to look around the sky
-5. Observe how angular measurements scale with zoom level
+5. Identify constellations and named stars
+6. Press the "← Home" button to return to the main menu
 
 ## Project Structure
 
@@ -103,8 +107,8 @@ AstronomyVisualized/
 │   │   ├── Home.css
 │   │   ├── OrbitSim.jsx       # Orbital mechanics simulator
 │   │   ├── OrbitSim.css
-│   │   ├── AngularSize.jsx    # Night sky viewer
-│   │   └── AngularSize.css
+│   │   ├── NightSky.jsx       # Night sky viewer
+│   │   └── NightSky.css
 │   ├── App.jsx          # Main app with routing
 │   ├── main.jsx         # Application entry point
 │   └── index.css        # Global styles
@@ -119,12 +123,14 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## Future Enhancements
 
-- Additional simulators for other astronomical concepts
-- Scoring system for the orbital mechanics simulator
-- More deep sky objects and constellations
-- Mobile-responsive controls
+- Additional simulators for other astronomical concepts (phases of the moon, eclipses, etc.)
+- Scoring system and challenges for the orbital mechanics simulator
+- More constellations from both hemispheres
+- Deep sky objects (galaxies, nebulae, star clusters)
+- Mobile-responsive touch controls
 - Save/load simulation states
-- Educational tooltips and guided tours
+- Educational tooltips and guided constellation tours
+- Real-time sky view based on user location and time
 
 ## License
 
@@ -132,8 +138,9 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Acknowledgments
 
-- Star data from the Yale Bright Star Catalog
-- Celestial object positions from astronomical databases
+- Real star data with accurate celestial coordinates (RA/Dec)
+- Constellation patterns based on traditional asterisms
+- Physics simulations based on Newtonian mechanics
 - Inspired by the need for accessible, interactive astronomy education tools
 
 ## Author

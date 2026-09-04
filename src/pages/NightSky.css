@@ -1,4 +1,4 @@
-.angular-size-page {
+.night-sky-page {
   width: 100vw;
   height: 100vh;
   margin: 0;
@@ -7,7 +7,31 @@
   background: #000814;
 }
 
-.angular-size-container {
+.back-button {
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  padding: 0.75rem 1.5rem;
+  background: rgba(15, 23, 42, 0.9);
+  border: 2px solid rgba(59, 130, 246, 0.5);
+  border-radius: 8px;
+  color: #60a5fa;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  backdrop-filter: blur(12px);
+  transition: all 0.3s ease;
+  z-index: 2000;
+}
+
+.back-button:hover {
+  background: rgba(15, 23, 42, 1);
+  border-color: #3b82f6;
+  color: #3b82f6;
+  transform: translateX(4px);
+}
+
+.night-sky-container {
   position: relative;
   width: 100%;
   height: 100%;
@@ -19,7 +43,6 @@ canvas {
   height: 100%;
 }
 
-/* Instructions Overlay */
 .instructions-overlay {
   position: absolute;
   top: 0;
@@ -35,7 +58,7 @@ canvas {
   animation: fadeIn 0.3s ease;
 }
 
-.instructions-content {
+.instructions-popup {
   background: rgba(15, 23, 42, 0.95);
   border: 2px solid rgba(59, 130, 246, 0.5);
   border-radius: 16px;
@@ -44,12 +67,18 @@ canvas {
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
 }
 
-.instructions-content h2 {
+.instructions-popup h2 {
   color: #3b82f6;
   font-size: 1.75rem;
   margin: 0 0 1.5rem 0;
   text-align: center;
   font-weight: 700;
+}
+
+.instructions-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
 }
 
 .instruction-item {
@@ -101,10 +130,9 @@ canvas {
   }
 }
 
-/* Info Panel - Top Left */
 .info-panel {
   position: absolute;
-  top: 2rem;
+  top: 6rem;
   left: 2rem;
   background: rgba(15, 23, 42, 0.85);
   backdrop-filter: blur(12px);
@@ -139,4 +167,80 @@ canvas {
   font-size: 0.875rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+}
+
+.zoom-slider-container {
+  position: absolute;
+  left: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(59, 130, 246, 0.4);
+  border-radius: 12px;
+  padding: 2rem 1rem;
+  z-index: 10;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  height: 400px;
+}
+
+.zoom-slider {
+  writing-mode: bt-lr;
+  -webkit-appearance: slider-vertical;
+  width: 8px;
+  height: 250px;
+  background: rgba(59, 130, 246, 0.2);
+  border-radius: 8px;
+  outline: none;
+  cursor: pointer;
+}
+
+.zoom-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.6);
+}
+
+.zoom-slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.6);
+}
+
+.zoom-label {
+  color: #94a3b8;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.zoom-label-top {
+  margin-bottom: 0.5rem;
+}
+
+.zoom-label-bottom {
+  margin-top: 0.5rem;
+}
+
+.zoom-indicator {
+  position: absolute;
+  right: -3rem;
+  color: #60a5fa;
+  font-size: 0.875rem;
+  font-weight: 600;
+  white-space: nowrap;
 }

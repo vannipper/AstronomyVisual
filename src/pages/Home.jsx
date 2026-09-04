@@ -11,9 +11,9 @@ function Home() {
       color: '#3b82f6'
     },
     {
-      id: 'angular',
-      title: 'Angular Size',
-      path: '/angular-size',
+      id: 'night-sky',
+      title: 'Night Sky',
+      path: '/night-sky',
       color: '#8b5cf6'
     }
   ];
@@ -37,6 +37,21 @@ function Home() {
                 <h2>{viz.title}</h2>
               </div>
               <div className="card-accent" />
+              {viz.id === 'orbit' && (
+                <>
+                  <div className="orbit-ring-1"></div>
+                  <div className="orbit-ring-2"></div>
+                  <div className="planet-1"></div>
+                  <div className="planet-2"></div>
+                </>
+              )}
+              {viz.id === 'night-sky' && (
+                <>
+                  {[...Array(25)].map((_, i) => (
+                    <div key={i} className={`star star-${i + 1}`}></div>
+                  ))}
+                </>
+              )}
             </Link>
           ))}
         </div>
