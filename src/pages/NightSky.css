@@ -7,28 +7,66 @@
   background: #000814;
 }
 
-.back-button {
+.home-button {
   position: fixed;
   top: 1.5rem;
-  right: 1.5rem;
-  padding: 0.75rem 1.5rem;
+  left: 1.5rem;
+  width: 48px;
+  height: 48px;
+  padding: 0;
   background: rgba(15, 23, 42, 0.9);
   border: 2px solid rgba(59, 130, 246, 0.5);
   border-radius: 8px;
   color: #60a5fa;
   text-decoration: none;
-  font-weight: 600;
-  font-size: 1rem;
   backdrop-filter: blur(12px);
   transition: all 0.3s ease;
   z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.back-button:hover {
+.home-button:hover {
   background: rgba(15, 23, 42, 1);
   border-color: #3b82f6;
   color: #3b82f6;
-  transform: translateX(4px);
+}
+
+.home-button svg {
+  width: 24px;
+  height: 24px;
+}
+
+.help-button-top {
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  background: rgba(15, 23, 42, 0.9);
+  border: 2px solid rgba(139, 92, 246, 0.5);
+  border-radius: 8px;
+  color: #a78bfa;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.help-button-top:hover {
+  background: rgba(15, 23, 42, 1);
+  border-color: #8b5cf6;
+  color: #8b5cf6;
+}
+
+.help-button-top svg {
+  width: 22px;
+  height: 22px;
 }
 
 .night-sky-container {
@@ -55,70 +93,110 @@ canvas {
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  animation: fadeIn 0.3s ease;
 }
 
 .instructions-popup {
-  background: rgba(15, 23, 42, 0.95);
+  background: rgba(15, 23, 42, 0.98);
   border: 2px solid rgba(59, 130, 246, 0.5);
   border-radius: 16px;
   padding: 2.5rem;
-  max-width: 500px;
+  max-width: 600px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
 }
 
 .instructions-popup h2 {
-  color: #3b82f6;
+  color: #f8fafc;
   font-size: 1.75rem;
-  margin: 0 0 1.5rem 0;
+  margin: 0 0 0.5rem 0;
   text-align: center;
-  font-weight: 700;
+  font-weight: 600;
 }
 
-.instructions-content {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
+.instructions-subtitle {
+  color: #94a3b8;
+  text-align: center;
+  margin: 0 0 2rem 0;
+  font-size: 0.95rem;
 }
 
-.instruction-item {
+.instructions-section {
+  margin-bottom: 2rem;
+}
+
+.instructions-section:last-of-type {
+  margin-bottom: 2.5rem;
+}
+
+.instructions-section h3 {
+  color: #3b82f6;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 0 0 1rem 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.control-row {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 1rem;
-  margin-bottom: 1.25rem;
-  color: #cbd5e1;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(59, 130, 246, 0.1);
 }
 
-.instruction-icon {
-  font-size: 1.5rem;
-  width: 40px;
+.control-row:last-child {
+  border-bottom: none;
+}
+
+.control-action {
+  color: #e2e8f0;
+  font-size: 0.9rem;
+}
+
+.control-key {
+  color: #94a3b8;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.control-key.key {
+  background: rgba(59, 130, 246, 0.2);
+  padding: 0.35rem 0.75rem;
+  border-radius: 6px;
+  border: 1px solid rgba(59, 130, 246, 0.4);
+  font-family: monospace;
+  font-weight: 600;
+  color: #93c5fd;
+  min-width: 32px;
   text-align: center;
 }
 
-.instruction-item p {
+.objective-text {
+  color: #94a3b8;
+  font-size: 0.9rem;
+  line-height: 1.6;
   margin: 0;
-  font-size: 1rem;
-  line-height: 1.5;
 }
 
 .start-button {
   width: 100%;
   padding: 1rem;
-  margin-top: 1.5rem;
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  margin-top: 0;
+  background: #3b82f6;
   border: none;
   border-radius: 8px;
   color: white;
-  font-size: 1rem;
+  font-size: 1.125rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.4);
+  transition: background 0.2s ease;
 }
 
 .start-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 24px rgba(59, 130, 246, 0.6);
+  background: #2563eb;
+}
 }
 
 @keyframes fadeIn {
@@ -132,21 +210,21 @@ canvas {
 
 .info-panel {
   position: absolute;
-  top: 6rem;
-  left: 2rem;
-  background: rgba(15, 23, 42, 0.85);
+  top: 5.5rem;
+  left: 1.5rem;
+  background: rgba(15, 23, 42, 0.9);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(59, 130, 246, 0.4);
+  border: 2px solid rgba(59, 130, 246, 0.4);
   border-radius: 12px;
-  padding: 1.5rem;
+  padding: 1.25rem;
   z-index: 10;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-  min-width: 200px;
+  min-width: 160px;
 }
 
 .info-panel h3 {
   color: #64748b;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   margin: 0 0 0.75rem 0;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -155,7 +233,7 @@ canvas {
 
 .fov-value {
   color: #3b82f6;
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: 700;
   line-height: 1;
   margin-bottom: 0.25rem;
@@ -164,28 +242,28 @@ canvas {
 
 .unit-name {
   color: #64748b;
-  font-size: 0.875rem;
+  font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 
 .zoom-slider-container {
   position: absolute;
-  left: 2rem;
+  left: 1.5rem;
   top: 50%;
   transform: translateY(-50%);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  background: rgba(15, 23, 42, 0.85);
+  background: rgba(15, 23, 42, 0.9);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(59, 130, 246, 0.4);
+  border: 2px solid rgba(59, 130, 246, 0.4);
   border-radius: 12px;
-  padding: 2rem 1rem;
+  padding: 1.5rem 1rem;
   z-index: 10;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-  height: 400px;
+  height: 360px;
 }
 
 .zoom-slider {

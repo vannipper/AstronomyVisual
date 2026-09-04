@@ -697,7 +697,23 @@ const NightSky = () => {
 
   return (
     <div className="night-sky-page">
-      <Link to="/" className="back-button">← Home</Link>
+      <Link to="/" className="home-button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+          <polyline points="9 22 9 12 15 12 15 22"></polyline>
+        </svg>
+      </Link>
+
+      {!showInstructions && (
+        <button onClick={() => setShowInstructions(true)} className="help-button-top">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+          </svg>
+        </button>
+      )}
+
       <div className="night-sky-container">
         <canvas
           ref={canvasRef}
@@ -707,17 +723,38 @@ const NightSky = () => {
         {showInstructions && (
           <div className="instructions-overlay">
             <div className="instructions-popup">
-              <h2>How to Explore</h2>
-              <div className="instructions-content">
-                <div className="instruction-item">
-                  <span className="instruction-icon">🖱️</span>
-                  <p><strong>Scroll</strong> to zoom in and out</p>
+              <h2>Night Sky Explorer</h2>
+              <p className="instructions-subtitle">Navigate the celestial sphere</p>
+
+              <div className="instructions-section">
+                <h3>Mouse Controls</h3>
+                <div className="control-row">
+                  <span className="control-action">Look around</span>
+                  <span className="control-key">Click & Drag</span>
                 </div>
-                <div className="instruction-item">
-                  <span className="instruction-icon">👆</span>
-                  <p><strong>Click and drag</strong> to look around the sky</p>
+                <div className="control-row">
+                  <span className="control-action">Zoom</span>
+                  <span className="control-key">Scroll Wheel</span>
                 </div>
               </div>
+
+              <div className="instructions-section">
+                <h3>Interface</h3>
+                <div className="control-row">
+                  <span className="control-action">Field of View indicator</span>
+                  <span className="control-key">Top Left</span>
+                </div>
+                <div className="control-row">
+                  <span className="control-action">Zoom slider</span>
+                  <span className="control-key">Left Side</span>
+                </div>
+              </div>
+
+              <div className="instructions-section">
+                <h3>Features</h3>
+                <p className="objective-text">Explore a real-time rendering of the night sky with accurate star positions and magnitudes. Hover over stars to see their names and properties.</p>
+              </div>
+
               <button
                 className="start-button"
                 onClick={() => setShowInstructions(false)}
